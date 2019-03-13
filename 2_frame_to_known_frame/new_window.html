@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <title>New Window</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <div class="content">
+    <h1>Hi, I'm a new window!</h1>
+    <button id="update_opener">Update Original Window</button>
+    <div id="notifications">
+    </div>
+  </div>
+
+  <script>
+    // Notfications behaviour copied from iframe
+    var notifications = document.getElementById("notifications");
+
+    var addNotifcation = function(event) {
+      var existingContent = notifications.innerHTML;
+      notifications.innerHTML = event.data + "<br />" + existingContent;
+    };
+
+    window.addEventListener("message", addNotifcation, false);
+  </script>
+
+  <script>
+    // Send a message back to the window that opened me
+    var update_button = document.getElementById("update_opener");
+
+    update_button.onclick = function() {
+      window.opener.postMessage("Hello! I came from the newly opened window", "*");
+    }
+  </script>
+</body>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <title>Frame to frame</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <div class="content">
+    <h1>Parent Frame</h1>
+    <input  id="input" type="text" />
+    <button id="send_message">Send Message</button>
+
+    <button id="open_frame">Open Frame</button>
+
+    <iframe id="iframe" src="iframe_content.html"></iframe>
+  </div>
+
+  <script>
+    var input       = document.getElementById("input");
+    var send_button = document.getElementById("send_message");
+    var iframe      = document.getElementById("iframe");
+
+    send_button.onclick = function(){
+      // Send a message to an iframe.
+      iframe.contentWindow.postMessage(input.value, '*');
+
+      // Send message to a window we opened and have
+      // a reference to.
+      if (typeof opened_window !== 'undefined') {
+        opened_window.postMessage(input.value, '*');
+      }
+    };
+
+    open_frame.onclick = function(){
+      opened_window = window.open("./new_window.html")
+    }
+
+
+    // Listen for incoming messages
+    var passMessageToIframe = function(event) {
+      iframe.contentWindow.postMessage(event.data, '*');
+    };
+
+    window.addEventListener("message", passMessageToIframe, false);
+  </script>
+</body>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <title>iframe Content</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <div class="content">
+    <h1>Hi, I'm an iFrame!</h1>
+    <div id="notifications">
+    </div>
+  </div>
+
+  <script>
+    var notifications = document.getElementById("notifications");
+
+    var addNotifcation = function(event) {
+      var existingContent = notifications.innerHTML;
+      notifications.innerHTML = event.data + "<br />" + existingContent;
+    };
+
+    window.addEventListener("message", addNotifcation, false);
+  </script>
+</body>

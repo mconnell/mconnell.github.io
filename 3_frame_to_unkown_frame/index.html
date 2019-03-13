@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <title>Frame to unknown frame</title>
+  <link rel="stylesheet" type="text/css" href="../styles.css">
+</head>
+<body>
+  <div class="content">
+    <h1>Window</h1>
+    <input id="input" type="text" />
+    <button id="send_message">Send Message</button>
+  </div>
+
+  <script>
+    // Set storage value
+    var send_button = document.getElementById("send_message");
+    send_button.onclick = function(){
+      console.log("butotn click")
+      localStorage.setItem("my-magic-key", "foo")
+    };
+
+    // listen for storage value
+    var listener = function(event) {
+      console.log("event")
+      alert("key: " + event.key + "; Value: " + event.value)
+    }
+
+    window.addEventListener("storage", listener, false)
+  </script>
+</body>

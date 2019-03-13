@@ -1,0 +1,24 @@
+body {
+  font-family: "Helvetica Neue";
+}
+
+iframe {
+  border: 1px dashed red;
+  width: 700px;
+  margin: 30px;
+  height: 300px;
+}
+
+div.content {
+  width: 760px;
+  margin: 0 auto;
+}
+
+div#notifications {
+  border: 1px solid #eee;
+  width: 650px;
+}
+
+#open_frame {
+  float: right;
+}
