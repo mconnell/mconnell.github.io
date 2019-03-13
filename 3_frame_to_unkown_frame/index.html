@@ -8,13 +8,18 @@
     <h1>Window</h1>
     <input id="input" type="text" />
     <button id="send_message">Send Message</button>
+
+    <div id="notifications">
+    </div>
   </div>
 
   <script>
+    var notifications = document.getElementById("notifications");
+    var send_button   = document.getElementById("send_message");
+
     // Set storage value
-    var send_button = document.getElementById("send_message");
     send_button.onclick = function(){
-      localStorage.setItem("my-magic-key", input.value)
+      localStorage.setItem("notification", input.value)
     };
 
     // listen for storage value
@@ -22,6 +27,13 @@
       alert("key: " + event.key + "; Value: " + event.newValue)
     }
 
-    window.addEventListener("storage", listener, false)
+    var addNotifcation = function(event) {
+      if (event.key === 'notifcation') {
+        var existingContent = notifications.innerHTML;
+        notifications.innerHTML = event.newValue + "<br />" + existingContent;
+      }
+    };
+
+    window.addEventListener("storage", addNotifcation, false)
   </script>
 </body>
