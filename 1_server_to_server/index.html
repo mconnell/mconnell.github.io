@@ -4,23 +4,34 @@
   <link rel="stylesheet" type="text/css" href="../styles.css">
   <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
   <script>
-    var pusher = new Pusher('af321e502a7dd17a261e', {
-      cluster: 'eu',
-      forceTLS: true
-    });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(JSON.stringify(data));
-    });
   </script>
 </head>
 <body>
   <div class="content">
     <h1>Websocket / Pusher example</h1>
-    <p>
-      Try publishing an event to channel <code>my-channel</code>
-      with event name <code>my-event</code>.
-    </p>
+
+    <div id="notifications">
+    </div>
   </div>
+
+  <script>
+    var pusher = new Pusher('af321e502a7dd17a261e', {
+      cluster: 'eu',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('notifications-channel');
+
+    var notifications = document.getElementById("notifications");
+
+    var addNotifcation = function(data) {
+      var existingContent = notifications.innerHTML;
+      notifications.innerHTML = data.message + "<br />" + existingContent;
+    };
+
+    channel.bind('new-notification', function(data) {
+      addNotifcation(data);
+    });
+  </script>
 </body>

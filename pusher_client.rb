@@ -8,6 +8,6 @@ pusher_client = Pusher::Client.new(
   encrypted: true
 )
 
-pusher_client.trigger('my-channel', 'my-event', {
-  message: 'hello world'
+pusher_client.trigger('notifications-channel', 'new-notification', {
+  message: "Random Number #{rand(100)} from from server"
 })
