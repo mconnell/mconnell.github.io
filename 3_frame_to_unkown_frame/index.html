@@ -14,14 +14,12 @@
     // Set storage value
     var send_button = document.getElementById("send_message");
     send_button.onclick = function(){
-      console.log("butotn click")
-      localStorage.setItem("my-magic-key", "foo")
+      localStorage.setItem("my-magic-key", input.value)
     };
 
     // listen for storage value
     var listener = function(event) {
-      console.log("event")
-      alert("key: " + event.key + "; Value: " + event.value)
+      alert("key: " + event.key + "; Value: " + event.newValue)
     }
 
     window.addEventListener("storage", listener, false)
